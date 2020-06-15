@@ -18,7 +18,7 @@ class Player:
         self.current_hand = []
         self.current_points = 0
 
-    def receive_money(self, value):
+    def give_money(self, value):
         if not value < 0:
             self.current_money += value
 

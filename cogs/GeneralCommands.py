@@ -16,7 +16,7 @@ class Commands(commands.Cog):
     # commands listener
     @commands.command(name='ping')
     async def ping(self, ctx):
-        await ctx.send(f'{str(ctx.author)} , my current ping is: {round(self.client.latency * 1000)}ms')
+        await ctx.send(f'my current ping is: {round(self.client.latency * 1000)}ms')
 
 
 def setup(client):

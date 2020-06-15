@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/BlackJackCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/BlackJackCommands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/model/Deck.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/model/Deck.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/model/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/model/Player.py" afterDir="false" />
@@ -23,12 +23,18 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Nikholas" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1dHy1245cN9XMNMDmqsneiflU5x" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/games" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -160,6 +166,14 @@
       <option name="presentableId" value="Default" />
       <updated>1592096094589</updated>
     </task>
+    <task id="LOCAL-00001" summary="Improving project architecture and adding points functionality">
+      <created>1592248719760</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592248719760</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,5 +188,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Improving project architecture and adding points functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improving project architecture and adding points functionality" />
   </component>
 </project>

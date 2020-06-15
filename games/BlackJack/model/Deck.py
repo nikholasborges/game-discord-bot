@@ -31,6 +31,21 @@ class Deck:
     def calculate_points(self, player: Player):
         current_points = 0
 
+        # checking if it's a blackjack
+        if len(player.current_hand) == 2:
+            first_jack = False
+            second_jack = False
+
+            for card in player.current_hand:
+                if any(i in card[:2] for i in ('J', 'Q', 'K')):
+                    first_jack = True
+                elif 'Ace' in card[:3]:
+                    second_jack = True
+
+            if first_jack and second_jack:
+                return 21
+
+        # calculating points
         for card in player.current_hand:
             if any(i in card[:2] for i in ('J', 'Q', 'K', '10')):
                 current_points += 10
