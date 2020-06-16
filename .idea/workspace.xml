@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/BlackJackCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/BlackJackCommands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/games/BlackJack/model/Deck.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/model/Deck.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/games/BlackJack/model/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/model/Player.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592248719760</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implementing score decider and the blackjack score">
+      <created>1592256618501</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592256618501</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -191,6 +194,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Improving project architecture and adding points functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improving project architecture and adding points functionality" />
+    <MESSAGE value="Implementing score decider and the blackjack score" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing score decider and the blackjack score" />
   </component>
 </project>
