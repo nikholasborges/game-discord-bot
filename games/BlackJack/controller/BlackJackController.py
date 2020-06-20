@@ -7,8 +7,8 @@ class BlackJackGame:
     def __init__(self, context):
         self.deck = Deck.Deck()
         self.players = [Player.Player(100, 'dealer'), Player.Player(100, 'player')]
-        self.current_player: Player = None
-        self.dealer: Player = None
+        self.current_player = None
+        self.dealer = None
         self.round_deal = 15
         self.round_bet = 0
         self.rounds_played = 0
@@ -41,10 +41,12 @@ class BlackJackGame:
 
         if player.player_type == 'player':
             await self.ctx.send('press !hit to take one more card or !stay to keep your points...')
+        else:
+            await self.ctx.send('-')
+
         self.debug()
 
     async def start_round(self):
-
         await self.ctx.send('--------  new round starting  --------')
 
         self.rounds_played += 1
@@ -83,7 +85,10 @@ class BlackJackGame:
             await self.calculate_dealer_plays()
 
     # calculate the hit move
-    async def player_hit(self, player: Player):
+    async def player_hit(self, player=None):
+
+        if player is None:
+            player = self.current_player
 
         if player.current_points <= 21:
             player.current_hand.append(self.deck.take_card())
@@ -103,6 +108,7 @@ class BlackJackGame:
     async def calculate_dealer_plays(self):
         loop = True
 
+        await self.ctx.send('-')
         await self.ctx.send('--------  calculating dealer points  --------')
         await self.send_player_status(self.dealer)
 
@@ -137,6 +143,7 @@ class BlackJackGame:
         else:
             await self.tie()
 
+        await self.ctx.send('-')
         await self.start_round()
 
     async def tie(self):
@@ -149,19 +156,23 @@ class BlackJackGame:
             f'/  dealer money: ${self.dealer.current_money}')
 
     async def player_won(self):
+        await self.ctx.send("Great, you won!")
         await self.ctx.send(
             f'your points: {self.current_player.current_points}  '
             f'/  dealer points: {self.dealer.current_points}')
         await self.ctx.send(
-            f'Great, you won... \n your current money is: ${self.current_player.current_money} '
-            f' /  dealer money: ${self.dealer.current_money}')
+            f'your current money is: ${self.current_player.current_money}  '
+            f'/  dealer money: ${self.dealer.current_money}')
 
         self.current_player.give_money(self.round_bet)
 
     async def player_lost(self):
+        await self.ctx.send("Sorry, you lost!")
         await self.ctx.send(
-            f'your points: {self.current_player.current_points}  /  dealer points: {self.dealer.current_points}')
+            f'your points: {self.current_player.current_points}  '
+            f'/  dealer points: {self.dealer.current_points}')
         await self.ctx.send(
-            f'sorry, you lost... \n your current money is: ${self.current_player.current_money}  /  dealer money: ${self.dealer.current_money}')
+            f'your current money is: ${self.current_player.current_money}  '
+            f'/  dealer money: ${self.dealer.current_money}')
 
         self.dealer.give_money(self.round_bet)
