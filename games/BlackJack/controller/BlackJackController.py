@@ -130,6 +130,8 @@ class BlackJackGame:
         player_points = self.current_player.current_points
         dealer_points = self.dealer.current_points
 
+        # TODO: Better code this decision logic
+
         if dealer_points > 21 and player_points > 21:
             await self.tie()
         elif player_points > 21:
