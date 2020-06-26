@@ -1,3 +1,5 @@
+import discord
+
 from ..model import Player
 from ..model import Deck
 
@@ -32,24 +34,49 @@ class BlackJackGame:
         print('')
 
     async def send_player_status(self, player: Player):
-        # await ctx.send(f'  : { }')
-        await self.ctx.send(f'round deal: ${self.round_deal}  '
-                            f'/  round bet: ${self.round_bet}')
-
-        await self.ctx.send(f'{player.player_type} ' f'hand: {player.current_hand}')
-        await self.ctx.send(f'{player.player_type} 'f'points: {player.current_points}')
+        embed_color = discord.Colour.red()
 
         if player.player_type == 'player':
-            await self.ctx.send('press !hit to take one more card or !stay to keep your points...')
-        else:
-            await self.ctx.send('-')
+            embed_color = discord.Colour.blue()
+
+        embed = discord.Embed(title=f'Round {self.rounds_played}', colour=embed_color)
+
+        embed.set_author(name=f'{player.player_type} turn'.upper())
+
+        embed.add_field(name='Round Deal', value=f'$ {str(self.round_deal)}', inline=True)
+        embed.add_field(name='Round Bet', value=f'$ {str(self.round_bet)}', inline=True)
+
+        embed.add_field(name='Hand', value=player.current_hand, inline=False)
+        embed.add_field(name='Points', value=str(player.current_points), inline=True)
+
+        await self.ctx.send(embed=embed)
 
         self.debug()
 
-    async def start_round(self):
-        await self.ctx.send('--------  new round starting  --------')
+    async def end_round(self, status):
 
-        self.rounds_played += 1
+        message = {'won': 'Great, you won!',
+                   'lost': 'Sorry, you lost!',
+                   'tie': "It's a tie!"}
+
+        if status == 'won':
+            self.current_player.give_money(self.round_bet)
+        elif status == 'lost':
+            self.dealer.give_money(self.round_bet)
+
+        embed = discord.Embed(title=f'{message[status]}',
+                              description=f'Round {self.rounds_played}',
+                              colour=discord.Colour.green())
+
+        embed.add_field(name='Your Points', value=f'{self.current_player.current_points}', inline=True)
+        embed.add_field(name='Dealer Points', value=f'{self.dealer.current_points}', inline=True)
+
+        embed.add_field(name='Your current Money', value=f'${self.current_player.current_money}', inline=False)
+        embed.add_field(name='Dealer Money', value=f'${self.dealer.current_money}', inline=True)
+
+        await self.ctx.send(embed=embed)
+
+    async def start_round(self):
 
         # shuffle deck and set overall game status
         self.deck.shuffle_deck()
@@ -81,7 +108,6 @@ class BlackJackGame:
         await self.send_player_status(self.current_player)
 
         if self.current_player.current_points == 21:
-            await self.ctx.send('BlackJack!!')
             await self.calculate_dealer_plays()
 
     # calculate the hit move
@@ -108,8 +134,6 @@ class BlackJackGame:
     async def calculate_dealer_plays(self):
         loop = True
 
-        await self.ctx.send('-')
-        await self.ctx.send('--------  calculating dealer points  --------')
         await self.send_player_status(self.dealer)
 
         while loop:
@@ -125,56 +149,22 @@ class BlackJackGame:
 
     async def decide_round_winner(self):
 
-        await self.ctx.send("--------  finalizing round  --------")
-
         player_points = self.current_player.current_points
         dealer_points = self.dealer.current_points
 
         # TODO: Better code this decision logic
 
         if dealer_points > 21 and player_points > 21:
-            await self.tie()
+            await self.end_round('tie')
         elif player_points > 21:
-            await self.player_lost()
+            await self.end_round('lost')
         elif dealer_points > 21:
-            await self.player_won()
+            await self.end_round('won')
         elif player_points > dealer_points:
-            await self.player_won()
+            await self.end_round('won')
         elif dealer_points > player_points:
-            await self.player_lost()
+            await self.end_round('lost')
         else:
-            await self.tie()
+            await self.end_round('tie')
 
-        await self.ctx.send('-')
         await self.start_round()
-
-    async def tie(self):
-        await self.ctx.send("It's a tie!")
-        await self.ctx.send(
-            f'your points: {self.current_player.current_points}  '
-            f'/  dealer points: {self.dealer.current_points}')
-        await self.ctx.send(
-            f'your current money is: ${self.current_player.current_money}  '
-            f'/  dealer money: ${self.dealer.current_money}')
-
-    async def player_won(self):
-        await self.ctx.send("Great, you won!")
-        await self.ctx.send(
-            f'your points: {self.current_player.current_points}  '
-            f'/  dealer points: {self.dealer.current_points}')
-        await self.ctx.send(
-            f'your current money is: ${self.current_player.current_money}  '
-            f'/  dealer money: ${self.dealer.current_money}')
-
-        self.current_player.give_money(self.round_bet)
-
-    async def player_lost(self):
-        await self.ctx.send("Sorry, you lost!")
-        await self.ctx.send(
-            f'your points: {self.current_player.current_points}  '
-            f'/  dealer points: {self.dealer.current_points}')
-        await self.ctx.send(
-            f'your current money is: ${self.current_player.current_money}  '
-            f'/  dealer money: ${self.dealer.current_money}')
-
-        self.dealer.give_money(self.round_bet)

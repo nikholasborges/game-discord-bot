@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="- Implementing MongoDB with mongoEngine classes&#10;- Implementing !register command to register a user&#10;- Implementing !profile command to show user's profile">
-      <change afterPath="$PROJECT_DIR$/context/MongoPosts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BotInitializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/BotInitializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" afterDir="false" />
     </list>
@@ -201,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592690036738</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="- Implementing MongoDB with mongoEngine classes&#10;- Implementing !register command to register a user&#10;- Implementing !profile command to show user's profile">
+      <created>1593136264781</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1593136264781</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
