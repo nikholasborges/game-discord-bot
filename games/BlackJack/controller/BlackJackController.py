@@ -1,17 +1,22 @@
 import discord
 
+from Util import MoneyParser
+import cogs.BlackJackCommands as BlackJackCommands
+from context.UserContext import UserContext
 from ..model import Player
 from ..model import Deck
 
 
 class BlackJackGame:
 
-    def __init__(self, context):
+    def __init__(self, context, player_money, user_id):
         self.deck = Deck.Deck()
-        self.players = [Player.Player(100, 'dealer'), Player.Player(100, 'player')]
+        self.players = [Player.Player(MoneyParser.dealer_money_parser(player_money), 'dealer'),
+                        Player.Player(player_money, 'player')]
+        self.current_player_id = user_id
         self.current_player = None
         self.dealer = None
-        self.round_deal = 15
+        self.round_deal = MoneyParser.round_deal_parser(player_money)
         self.round_bet = 0
         self.rounds_played = 0
         self.ctx = context
@@ -39,13 +44,13 @@ class BlackJackGame:
         if player.player_type == 'player':
             embed_color = discord.Colour.blue()
 
-        embed = discord.Embed(title=f'Round {self.rounds_played}', colour=embed_color)
+        embed = discord.Embed(title=f'Round {self.rounds_played}',
+                              colour=embed_color)
 
         embed.set_author(name=f'{player.player_type} turn'.upper())
 
         embed.add_field(name='Round Deal', value=f'$ {str(self.round_deal)}', inline=True)
         embed.add_field(name='Round Bet', value=f'$ {str(self.round_bet)}', inline=True)
-
         embed.add_field(name='Hand', value=player.current_hand, inline=False)
         embed.add_field(name='Points', value=str(player.current_points), inline=True)
 
@@ -70,13 +75,22 @@ class BlackJackGame:
 
         embed.add_field(name='Your Points', value=f'{self.current_player.current_points}', inline=True)
         embed.add_field(name='Dealer Points', value=f'{self.dealer.current_points}', inline=True)
-
         embed.add_field(name='Your current Money', value=f'${self.current_player.current_money}', inline=False)
         embed.add_field(name='Dealer Money', value=f'${self.dealer.current_money}', inline=True)
 
         await self.ctx.send(embed=embed)
 
     async def start_round(self):
+
+        if self.dealer is not None:
+            if self.dealer.current_money <= 0:
+                embed = discord.Embed(
+                    title='You won the game!',
+                    description=f"The dealear don't have more money to gamble, the game will be finalized",
+                    color=discord.Colour.gold())
+
+                await self.ctx.send(embed=embed)
+                self.end_game()
 
         # shuffle deck and set overall game status
         self.deck.shuffle_deck()
@@ -168,3 +182,8 @@ class BlackJackGame:
             await self.end_round('tie')
 
         await self.start_round()
+
+    def end_game(self):
+        UserContext(self.current_player_id).receive_money(self.current_player.current_money)
+        # TODO: better code this global game finalized logic
+        BlackJackCommands.current_game = None

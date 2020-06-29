@@ -4,6 +4,7 @@ from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
 from context.MongoPosts import UserPost
+from context.UserContext import UserContext
 
 
 class Commands(commands.Cog):
@@ -53,27 +54,44 @@ class Commands(commands.Cog):
                 await ctx.send('Seu usuário já está cadastrado.')
 
     @commands.command(name='profile')
-    async def profile(self, ctx):
+    async def profile(self, ctx, *member: discord.Member):
 
-        converter = commands.MemberConverter()
-        author_obj = await converter.convert(ctx, str(ctx.author))  # get the author obj
+        if len(member) > 0:
+            user_obj = member[0]
+        else:
+            user_obj = await commands.MemberConverter().convert(ctx, str(ctx.author))  # get the author obj
+
+        user_id = str(user_obj)[str(user_obj).find('#'):]
+        user_name = str(user_obj)[:str(user_obj).find('#')]
+        user_context = UserContext(user_id).user_obj
+        user_avatar = user_obj.avatar_url
+
         embed = discord.Embed(title='Profile', colour=discord.Colour.blue())
 
-        author_id = str(ctx.author)[str(ctx.author).find('#'):]
-        author_name = str(ctx.author)[:str(ctx.author).find('#')]
-        author_avatar = author_obj.avatar_url
+        if user_context is not None:
+            embed.set_author(name=user_name, icon_url=user_avatar)
+            embed.set_thumbnail(url=user_avatar)
+            embed.add_field(name='Dinheiro', value=f'$ {str(user_context.user_money)}', inline=False)
+            embed.add_field(name='Rodadas Ganhas', value=user_context.user_games_won, inline=False)
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(f'{user_obj.nick} ainda não está cadastrado!')
 
-        for user in UserPost.objects():
+    # command for testing purposes
+    @commands.command(name='give_money')
+    async def give_money(self, ctx, member: discord.Member, value):
+        if member is not None:
+            member_id = str(member)[str(member).find('#'):]
+            result = UserContext(member_id).receive_money(float(value))
 
-            if author_id == user.user_name:
-                embed.set_author(name=author_name, icon_url=author_avatar)
-                embed.set_thumbnail(url=author_avatar)
-                embed.add_field(name='Dinheiro', value=f'$ {str(user.user_money)}', inline=False)
-                embed.add_field(name='Rodadas Ganhas', value=user.user_games_won, inline=False)
-
+            if result:
+                embed = discord.Embed(description=f'User {member} received ${float(value)} sucessfully!',
+                                      colour=discord.Colour.green())
                 await ctx.send(embed=embed)
             else:
-                await ctx.send('Você ainda não está cadastrado!')
+                embed = discord.Embed(description=f'User did not received the money correctly',
+                                      colour=discord.Colour.red())
+                await ctx.send(embed=embed)
 
 
 def setup(client):

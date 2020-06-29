@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Util/MoneyParser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Util/Validator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Util/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/context/UserContext.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BotInitializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/BotInitializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/BlackJackCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/BlackJackCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" afterDir="false" />
     </list>
@@ -33,7 +37,7 @@
   <component name="PropertiesComponent">
     <property name="TODO_SCOPE" value="All Places" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/games" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -207,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593136264781</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- Implementing bot messages formatting (embed)">
+      <created>1593209536334</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593209536334</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,6 +241,7 @@
     <MESSAGE value="Formatting code" />
     <MESSAGE value="Formatting code 2" />
     <MESSAGE value="- Implementing MongoDB with mongoEngine classes&#10;- Implementing !register command to register a user&#10;- Implementing !profile command to show user's profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Implementing MongoDB with mongoEngine classes&#10;- Implementing !register command to register a user&#10;- Implementing !profile command to show user's profile" />
+    <MESSAGE value="- Implementing bot messages formatting (embed)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Implementing bot messages formatting (embed)" />
   </component>
 </project>
