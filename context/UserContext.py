@@ -5,17 +5,22 @@ class UserContext:
 
     def __init__(self, user_id):
         self.user_id = user_id
-        self.user_obj = self.retrieve_obj()
+        self.user_name = None
+        self.user_money = None
+        self.user_games_won = None
+        self.user_doc = self.get_doc()
 
-    def retrieve_obj(self):
+    def get_doc(self):
         try:
-            user_obj = None
+            user_doc = UserPost.objects(user_name=self.user_id).first()
 
-            for user in UserPost.objects():
-                if user.user_name == self.user_id:
-                    user_obj = user
-
-            return user_obj
+            if user_doc is not None:
+                self.user_name = user_doc.user_name
+                self.user_money = user_doc.user_money
+                self.user_games_won = user_doc.user_games_won
+                return user_doc
+            else:
+                return None
 
         except ConnectionError as err:
             print(f'Error at connecting to database: {err}')
@@ -27,16 +32,16 @@ class UserContext:
         if value <= 0:
             return
         else:
-            return self.user_obj.modify(dec__user_money=value)
+            return self.user_doc.modify(dec__user_money=value)
 
     def receive_money(self, value):
         if value <= 0:
             return
         else:
-            return self.user_obj.modify(inc__user_money=value)
+            return self.user_doc.modify(inc__user_money=value)
 
     def set_games_won(self, value):
         if value <= 0:
             return
         else:
-            return self.user_obj.modify(inc__user_games_won=value)
+            return self.user_doc.modify(inc__user_games_won=value)

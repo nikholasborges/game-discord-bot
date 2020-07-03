@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Util/MoneyParser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Util/Validator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Util/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/context/UserContext.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Util/MoneyParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Util/MoneyParser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/BlackJackCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/BlackJackCommands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/UserContext.py" beforeDir="false" afterPath="$PROJECT_DIR$/context/UserContext.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/BlackJack/model/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/model/Player.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +35,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="TODO_SCOPE" value="All Places" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/games" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Aplicações Starbeat Peru/LogHandler" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
@@ -218,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593209536334</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- Fix of some of the messages (changed to embed)&#10;- UserContext to manipulate user data&#10;- Logic to choose the money to gamble in the game">
+      <created>1593464780576</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593464780577</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,6 +248,18 @@
     <MESSAGE value="Formatting code 2" />
     <MESSAGE value="- Implementing MongoDB with mongoEngine classes&#10;- Implementing !register command to register a user&#10;- Implementing !profile command to show user's profile" />
     <MESSAGE value="- Implementing bot messages formatting (embed)" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Implementing bot messages formatting (embed)" />
+    <MESSAGE value="- Fix of some of the messages (changed to embed)&#10;- UserContext to manipulate user data&#10;- Logic to choose the money to gamble in the game" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fix of some of the messages (changed to embed)&#10;- UserContext to manipulate user data&#10;- Logic to choose the money to gamble in the game" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/cogs/GeneralCommands.py</url>
+          <line>80</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

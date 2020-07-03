@@ -24,6 +24,9 @@ class Player:
 
     def retrieve_money(self, value):
         if not value < 0:
-            self.current_money -= value
+            if not self.current_money - value < 0:
+                self.current_money -= value
+            else:
+                self.current_money = 0
 
         return value

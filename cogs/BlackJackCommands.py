@@ -17,12 +17,7 @@ class BlackJack(commands.Cog):
     # background task
     @tasks.loop(seconds=30)
     async def change_status(self):
-        global current_game
-
-        if current_game is not None:
-            await self.client.change_presence(activity=discord.Game('BlackJack'))
-        else:
-            await self.client.change_presence(activity=discord.Game('Awating to play!'))
+        pass
 
     # events listener
     @commands.Cog.listener()
@@ -33,6 +28,17 @@ class BlackJack(commands.Cog):
     @commands.command(name='blackjack')
     async def play_blackjack(self, ctx, *args):
         global current_game
+
+        # TODO: better code this decision logic
+
+        author_id = str(ctx.author)[str(ctx.author).find('#'):]
+        user_context = UserContext(author_id)
+
+        if user_context.user_doc is None:
+            embed = discord.Embed(description=f"current user isn't registered {ctx.author} \n"
+                                              f"You must register in order to play any game <!register>")
+            await ctx.send(embed=embed)
+            return
 
         if current_game is not None:
             embed = discord.Embed(
@@ -54,7 +60,6 @@ class BlackJack(commands.Cog):
             if Validator.valid_int(args[0]):
                 money = float(args[0])
                 user_id = str(ctx.author)[str(ctx.author).find('#'):]
-                user_context = UserContext(user_id).user_obj
 
                 # Validate if the money choosen to bet is less than the minimum allowed
                 if money < 25:
@@ -67,12 +72,11 @@ class BlackJack(commands.Cog):
                 # Validate if the money choosen to bet is more the user actually have
                 if user_context.user_money - money < 0:
                     embed = discord.Embed(
-                        description=f'Value choosen to bet ${money} is more than your current money ${user_context.user_money} \n'
-                                    f'The value that will be used to bet will be ${user_context.user_money}')
+                        description=f'Value choosen to bet ${money} is more than your current money ${user_context.user_money}')
                     await ctx.send(embed=embed)
-                    money = user_context.user_money
+                    return
 
-                UserContext(user_id).retrieve_money(money)
+                user_context.retrieve_money(money)
                 current_game = BlackJackGame(ctx, money, user_id)
                 self.current_user_playing = ctx.author
                 await current_game.start_round()
@@ -87,10 +91,12 @@ class BlackJack(commands.Cog):
             if ctx.author == self.current_user_playing:
                 await current_game.player_hit()
             else:
-                await ctx.send(f'tem gente jogando porra, tá pancado!? espera o {self.current_user_playing} terminar')
+                embed = discord.Embed(description=f"There's a game currently running for {self.current_user_playing}")
+                await ctx.send(embed=embed)
 
         else:
-            await ctx.send("Como que tu quer dar !hit sem começar um game?! da um !blackjack pra começar doidão")
+            embed = discord.Embed(description="There isn't a game running right now.")
+            await ctx.send(embed=embed)
 
     # commands listener
     @commands.command(name='stay')
@@ -98,11 +104,10 @@ class BlackJack(commands.Cog):
         global current_game
 
         if current_game is not None:
-
             await current_game.player_stay()
-
         else:
-            await ctx.send("Como que tu quer dar !stay sem começar um game?! da um !blackjack pra começar doidão")
+            embed = discord.Embed(description="There isn't a game running right now.")
+            await ctx.send(embed=embed)
 
     # commands listener
     @commands.command(name='end_game')
@@ -110,10 +115,12 @@ class BlackJack(commands.Cog):
         global current_game
 
         if current_game is not None:
-            current_game.end_game()
-            await ctx.send("Game finalized!")
+            await current_game.end_game()
+            embed = discord.Embed(description="Game Finalized.")
+            await ctx.send(embed=embed)
         else:
-            await ctx.send("Que jogo tu quer terminar se não tem nenhum rodando? maior burrão, da um !blackjack ai")
+            embed = discord.Embed(description="There isn't a game running right now.")
+            await ctx.send(embed=embed)
 
 
 def setup(client):
