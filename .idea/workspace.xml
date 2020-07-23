@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="" />
+    <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595547461419</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="- dnspython package requirement">
+      <created>1595547602279</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1595547602279</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -284,6 +293,7 @@
     <MESSAGE value="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;" />
     <MESSAGE value="- Heroku Configs" />
     <MESSAGE value="- dotenv package requirement" />
-    <option name="LAST_COMMIT_MESSAGE" value="- dotenv package requirement" />
+    <MESSAGE value="- dnspython package requirement" />
+    <option name="LAST_COMMIT_MESSAGE" value="- dnspython package requirement" />
   </component>
 </project>
