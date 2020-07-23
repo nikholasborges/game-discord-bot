@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/BlackJackCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/BlackJackCommands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/context/MongoPosts.py" beforeDir="false" afterPath="$PROJECT_DIR$/context/MongoPosts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/context/UserContext.py" beforeDir="false" afterPath="$PROJECT_DIR$/context/UserContext.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/BlackJack/controller/BlackJackController.py" afterDir="false" />
-    </list>
+    <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593795893339</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;">
+      <created>1595544357015</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1595544357015</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -256,6 +256,7 @@
     <MESSAGE value="- Implementing bot messages formatting (embed)" />
     <MESSAGE value="- Fix of some of the messages (changed to embed)&#10;- UserContext to manipulate user data&#10;- Logic to choose the money to gamble in the game" />
     <MESSAGE value="- Only registered members can play the blackjack game&#10;- Overall code structure and context bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Only registered members can play the blackjack game&#10;- Overall code structure and context bug fixes" />
+    <MESSAGE value="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;" />
   </component>
 </project>
