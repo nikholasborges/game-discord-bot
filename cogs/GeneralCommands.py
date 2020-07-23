@@ -42,15 +42,16 @@ class Commands(commands.Cog):
     @commands.command(name='register')
     async def register(self, ctx):
         current_author = str(ctx.author)
+        guild_id = str(ctx.guild)
         author_id = current_author[current_author.find('#'):]
 
         print(current_author)
         print(author_id)
 
-        user = UserPost.objects(user_name=author_id).first()
+        user_context = UserContext(author_id, guild_id)
 
-        if user is None or not author_id == user.user_name:
-            post = UserPost(user_name=author_id)
+        if user_context.user_doc is None or not author_id == user_context.user_name:
+            post = UserPost(user_name=author_id, guild_id=guild_id)
             post.save()
             embed = discord.Embed(description=f'Registered successfully')
             await ctx.send(embed=embed)
@@ -61,15 +62,16 @@ class Commands(commands.Cog):
     @commands.command(name='unregister')
     async def unregister(self, ctx, member: discord.Member):
         current_author = str(member)
+        guild_id = str(ctx.guild)
         author_id = current_author[current_author.find('#'):]
 
         print(current_author)
         print(author_id)
 
-        user = UserPost.objects(user_name=author_id).first()
+        user_context = UserContext(author_id, guild_id)
 
-        if user is not None and author_id == user.user_name:
-            user.delete()
+        if user_context is not None and author_id == user_context.user_name:
+            user_context.delete()
             embed = discord.Embed(description=f'Deleted successfully')
             await ctx.send(embed=embed)
         else:
@@ -83,9 +85,10 @@ class Commands(commands.Cog):
         else:
             user_obj = await commands.MemberConverter().convert(ctx, str(ctx.author))  # get the author obj
 
+        guild_id = str(ctx.guild)
         user_id = str(user_obj)[str(user_obj).find('#'):]
         user_name = str(user_obj)[:str(user_obj).find('#')]
-        user_context = UserContext(user_id)
+        user_context = UserContext(user_id, guild_id)
         user_avatar = user_obj.avatar_url
 
         embed = discord.Embed(title='Profile', colour=discord.Colour.blue())
@@ -93,8 +96,8 @@ class Commands(commands.Cog):
         if user_context.user_doc is not None:
             embed.set_author(name=user_name, icon_url=user_avatar)
             embed.set_thumbnail(url=user_avatar)
-            embed.add_field(name='Dinheiro', value=f'$ {str(user_context.user_money)}', inline=False)
-            embed.add_field(name='Rodadas Ganhas', value=user_context.user_games_won, inline=False)
+            embed.add_field(name='Money', value=f'$ {str(user_context.user_money)}', inline=False)
+            embed.add_field(name='Games Won', value=user_context.user_games_won, inline=False)
             await ctx.send(embed=embed)
         else:
             embed = discord.Embed(description=f'User {user_obj} not registered yet')
@@ -103,16 +106,27 @@ class Commands(commands.Cog):
     # command for testing purposes
     @commands.command(name='give_money')
     async def give_money(self, ctx, member: discord.Member, value):
-        if member is not None:
-            member_id = str(member)[str(member).find('#'):]
-            result = UserContext(member_id).receive_money(float(value))
 
-            if result:
-                embed = discord.Embed(description=f'User {member} received ${float(value)} sucessfully!')
-                await ctx.send(embed=embed)
+        if ctx.author.guild_permissions.administrator:
+
+            if member is not None:
+                guild_id = str(ctx.guild)
+                member_id = str(member)[str(member).find('#'):]
+                result = UserContext(member_id, guild_id).receive_money(float(value))
+
+                if result:
+                    embed = discord.Embed(description=f'User {member} received ${float(value)} sucessfully!')
+                    await ctx.send(embed=embed)
+                else:
+                    embed = discord.Embed(description=f'User did not received the money correctly')
+                    await ctx.send(embed=embed)
             else:
-                embed = discord.Embed(description=f'User did not received the money correctly')
+                embed = discord.Embed(description=f"user specified doesn't exists")
                 await ctx.send(embed=embed)
+
+        else:
+            embed = discord.Embed(description=f"you don't have enough permission to use this command")
+            await ctx.send(embed=embed)
 
 
 def setup(client):

@@ -5,6 +5,7 @@ connect('Gamble_Bot_Database', host='mongodb+srv://Nikholas:nik220171@discordbot
 
 
 class UserPost(Document):
+    guild_id = StringField(required=True, max_length=100)
     user_name = StringField(required=True, max_length=200)
     user_money = FloatField(default=200)
     user_games_won = IntField(default=0)

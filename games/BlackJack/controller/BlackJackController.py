@@ -50,8 +50,8 @@ class BlackJackGame:
         embed_round = discord.Embed(title=f'Round {self.rounds_played}', colour=embed_color)
 
         embed_round.set_author(name=f'{player.player_type} turn'.upper())
-        embed_round.add_field(name='Round Bet', value=f'$ {str(self.round_bet)}', inline=True)
-        embed_round.add_field(name='Round Amount', value=f'$ {str(self.round_amount)}', inline=True)
+        embed_round.add_field(name='Round Bet', value=f'$ {self.round_bet:.2f}', inline=True)
+        embed_round.add_field(name='Round Amount', value=f'$ {self.round_amount:.2f}', inline=True)
         embed_round.add_field(name='Hand', value=player.current_hand, inline=False)
         embed_round.add_field(name='Points', value=str(player.current_points), inline=True)
 
@@ -60,42 +60,25 @@ class BlackJackGame:
 
         self.debug()
 
-    async def end_round(self, status):
-
-        message = {'won': 'Great, you won!',
-                   'lost': 'Sorry, you lost!',
-                   'tie': "It's a tie!"}
-
-        if status == 'won':
-            self.current_player.give_money(self.round_amount)
-        elif status == 'lost':
-            self.dealer.give_money(self.round_amount)
-        else:
-            round_bet_splitted = self.round_amount / len(self.players)
-            self.current_player.give_money(round_bet_splitted)
-            self.dealer.give_money(round_bet_splitted)
-
-        embed = discord.Embed(title=f'{message[status]}',
-                              description=f'Round {self.rounds_played}',
-                              colour=discord.Colour.green())
-
-        embed.add_field(name='Your Points', value=f'{self.current_player.current_points}', inline=True)
-        embed.add_field(name='Dealer Points', value=f'{self.dealer.current_points}', inline=True)
-        embed.add_field(name='Your Money', value=f'${self.current_player.current_money}', inline=False)
-        embed.add_field(name='Dealer Money', value=f'${self.dealer.current_money}', inline=True)
-
-        await asyncio.sleep(0.5)
-        await self.ctx.send(embed=embed)
-
     async def start_round(self):
 
+        # checking if the players still have money to gamble
         if self.dealer is not None:
             if self.dealer.current_money <= 0 or self.dealer.current_money - self.round_bet <= 0:
                 embed = discord.Embed(
                     title='You won the game!',
                     description=f"The dealear don't have more money to gamble, the game will be finalized",
                     color=discord.Colour.gold())
+                await self.ctx.send(embed=embed)
+                await self.end_game()
+                return
 
+        if self.current_player is not None:
+            if self.current_player.current_money <= 0 or self.current_player.current_money - self.round_bet <= 0:
+                embed = discord.Embed(
+                    title='You lost the game!',
+                    description=f"You don't have more money to gamble, the game will be finalized",
+                    color=discord.Colour.gold())
                 await self.ctx.send(embed=embed)
                 await self.end_game()
                 return
@@ -130,8 +113,8 @@ class BlackJackGame:
         # send players money status [single player only]
         embed_money = discord.Embed(title=f'Round {self.rounds_played}', colour=discord.Colour.green())
 
-        embed_money.add_field(name='Your Money', value=f'${self.current_player.current_money}', inline=True)
-        embed_money.add_field(name='Dealer Money', value=f'${self.dealer.current_money}', inline=True)
+        embed_money.add_field(name='Your Money', value=f'${self.current_player.current_money:.2f}', inline=True)
+        embed_money.add_field(name='Dealer Money', value=f'${self.dealer.current_money:.2f}', inline=True)
 
         await self.ctx.send(embed=embed_money)
 
@@ -200,6 +183,33 @@ class BlackJackGame:
 
         await self.start_round()
 
+    async def end_round(self, status):
+
+        message = {'won': 'Great, you won!',
+                   'lost': 'Sorry, you lost!',
+                   'tie': "It's a tie!"}
+
+        if status == 'won':
+            self.current_player.give_money(self.round_amount)
+        elif status == 'lost':
+            self.dealer.give_money(self.round_amount)
+        else:
+            round_bet_splitted = self.round_amount / len(self.players)
+            self.current_player.give_money(round_bet_splitted)
+            self.dealer.give_money(round_bet_splitted)
+
+        embed = discord.Embed(title=f'{message[status]}',
+                              description=f'Round {self.rounds_played}',
+                              colour=discord.Colour.green())
+
+        embed.add_field(name='Your Points', value=f'{self.current_player.current_points}', inline=True)
+        embed.add_field(name='Dealer Points', value=f'{self.dealer.current_points}', inline=True)
+        embed.add_field(name='Your Money', value=f'${self.current_player.current_money:.2f}', inline=False)
+        embed.add_field(name='Dealer Money', value=f'${self.dealer.current_money:.2f}', inline=True)
+
+        await asyncio.sleep(0.5)
+        await self.ctx.send(embed=embed)
+
     async def end_game(self):
 
         user_context = UserContext(self.current_player_id)
@@ -208,10 +218,10 @@ class BlackJackGame:
         amount_earned = self.current_player.current_money - self.player_bet_money
 
         if amount_earned > 0:
-            embed = discord.Embed(title=f'Amount earned: ${amount_earned}', color=discord.Colour.gold())
+            embed = discord.Embed(title=f'Amount earned: ${amount_earned:.2f}', color=discord.Colour.gold())
             await self.ctx.send(embed=embed)
         else:
-            embed = discord.Embed(title=f'You lost: ${amount_earned}', color=discord.Colour.gold())
+            embed = discord.Embed(title=f'You lost: ${amount_earned:.2f}', color=discord.Colour.gold())
             await self.ctx.send(embed=embed)
 
         # TODO: better code this global game finalized logic

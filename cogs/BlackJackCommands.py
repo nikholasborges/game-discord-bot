@@ -31,8 +31,9 @@ class BlackJack(commands.Cog):
 
         # TODO: better code this decision logic
 
+        guild_id = str(ctx.guild)
         author_id = str(ctx.author)[str(ctx.author).find('#'):]
-        user_context = UserContext(author_id)
+        user_context = UserContext(author_id, guild_id)
 
         if user_context.user_doc is None:
             embed = discord.Embed(description=f"current user isn't registered {ctx.author} \n"
