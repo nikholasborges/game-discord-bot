@@ -2,3 +2,4 @@ async-timeout==3.0.1
 discord.py==1.3.4
 mongoengine==0.20.0
 python-dotenv
+dnspython==1.16.0
