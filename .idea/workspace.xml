@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -243,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595545999211</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="- dotenv package requirement">
+      <created>1595547293710</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1595547293710</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -272,6 +278,7 @@
     <MESSAGE value="- Only registered members can play the blackjack game&#10;- Overall code structure and context bug fixes" />
     <MESSAGE value="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;" />
     <MESSAGE value="- Heroku Configs" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Heroku Configs" />
+    <MESSAGE value="- dotenv package requirement" />
+    <option name="LAST_COMMIT_MESSAGE" value="- dotenv package requirement" />
   </component>
 </project>
