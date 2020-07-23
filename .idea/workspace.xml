@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -237,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595544357015</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="- Heroku Configs">
+      <created>1595545999211</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1595545999211</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,6 +271,7 @@
     <MESSAGE value="- Fix of some of the messages (changed to embed)&#10;- UserContext to manipulate user data&#10;- Logic to choose the money to gamble in the game" />
     <MESSAGE value="- Only registered members can play the blackjack game&#10;- Overall code structure and context bug fixes" />
     <MESSAGE value="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Only administrators can use the command !give_money&#10;- Separating profile info on MongoDB per guild &quot;guild_id field&quot;" />
+    <MESSAGE value="- Heroku Configs" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Heroku Configs" />
   </component>
 </project>
