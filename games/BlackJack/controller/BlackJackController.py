@@ -3,7 +3,7 @@ import asyncio
 import discord
 
 from Util import MoneyParser
-import cogs.BlackJackCommands as BlackJackCommands
+from cogs.BlackJackCommands import BlackJackCommands
 from context.UserContext import UserContext
 from ..model import Player
 from ..model import Deck
