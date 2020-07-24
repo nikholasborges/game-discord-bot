@@ -125,4 +125,4 @@ class BlackJackCommands(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(BlackJack(client))
+    client.add_cog(BlackJackCommands(client))

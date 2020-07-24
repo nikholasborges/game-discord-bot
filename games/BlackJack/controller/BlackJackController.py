@@ -3,7 +3,7 @@ import asyncio
 import discord
 
 from Util import MoneyParser
-from cogs.BlackJackCommands import BlackJackCommands
+import cogs.BlackJackCommands as BlackJackCommands
 from context.UserContext import UserContext
 from ..model import Player
 from ..model import Deck
@@ -11,12 +11,13 @@ from ..model import Deck
 
 class BlackJackGame:
 
-    def __init__(self, context, player_money, user_id):
+    def __init__(self, context, player_money, user_id, guild_id):
         self.deck = Deck.Deck()
         self.player_bet_money = player_money
         self.players = [Player.Player(MoneyParser.dealer_money_parser(player_money), 'dealer'),
                         Player.Player(player_money, 'player')]
         self.current_player_id = user_id
+        self.current_guild_id = guild_id
         self.current_player = None
         self.dealer = None
         self.round_bet = MoneyParser.round_deal_parser(player_money)
@@ -212,7 +213,7 @@ class BlackJackGame:
 
     async def end_game(self):
 
-        user_context = UserContext(self.current_player_id)
+        user_context = UserContext(self.current_player_id, self.current_guild_id)
         user_context.receive_money(self.current_player.current_money)
 
         amount_earned = self.current_player.current_money - self.player_bet_money

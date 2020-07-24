@@ -130,4 +130,4 @@ class GeneralCommands(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Commands(client))
+    client.add_cog(GeneralCommands(client))
