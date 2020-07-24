@@ -8,7 +8,7 @@ from games.BlackJack.controller.BlackJackController import BlackJackGame
 current_game = None
 
 
-class BlackJack(commands.Cog):
+class BlackJackCommands(commands.Cog):
 
     def __init__(self, client):
         self.client = client

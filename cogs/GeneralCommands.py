@@ -7,7 +7,7 @@ from context.MongoPosts import UserPost
 from context.UserContext import UserContext
 
 
-class Commands(commands.Cog):
+class GeneralCommands(commands.Cog):
 
     def __init__(self, bot_obj):
         load_dotenv()
