@@ -27,17 +27,24 @@ class GeneralCommands(commands.Cog):
 
     @commands.command(name='clear')
     async def clear(self, ctx):
-        current_channel = ctx.message.channel
 
-        # checking the current amount of messages to delete
-        messages = await current_channel.history(limit=None).flatten()
+        if ctx.author.guild_permissions.administrator:
 
-        # deleting messages from the channel
-        await current_channel.purge(limit=len(messages))
+            current_channel = ctx.message.channel
 
-        embed = discord.Embed(description=f'Deleted {len(messages)} messages from this channel.')
-        await ctx.send(embed=embed)
-        messages.clear()
+            # checking the current amount of messages to delete
+            messages = await current_channel.history(limit=None).flatten()
+
+            # deleting messages from the channel
+            await current_channel.purge(limit=len(messages))
+
+            embed = discord.Embed(description=f'Deleted {len(messages)} messages from this channel.')
+            await ctx.send(embed=embed)
+            messages.clear()
+
+        else:
+            embed = discord.Embed(description=f"you don't have enough permission to use this command")
+            await ctx.send(embed=embed)
 
     @commands.command(name='register')
     async def register(self, ctx):
@@ -61,21 +68,28 @@ class GeneralCommands(commands.Cog):
 
     @commands.command(name='unregister')
     async def unregister(self, ctx, member: discord.Member):
-        current_author = str(member)
-        guild_id = str(ctx.guild)
-        author_id = current_author[current_author.find('#'):]
 
-        print(current_author)
-        print(author_id)
+        if ctx.author.guild_permissions.administrator:
 
-        user_context = UserContext(author_id, guild_id)
+            current_author = str(member)
+            guild_id = str(ctx.guild)
+            author_id = current_author[current_author.find('#'):]
 
-        if user_context is not None and author_id == user_context.user_name:
-            user_context.delete()
-            embed = discord.Embed(description=f'Deleted successfully')
-            await ctx.send(embed=embed)
+            print(current_author)
+            print(author_id)
+
+            user_context = UserContext(author_id, guild_id)
+
+            if user_context is not None and author_id == user_context.user_name:
+                user_context.delete()
+                embed = discord.Embed(description=f'Deleted successfully')
+                await ctx.send(embed=embed)
+            else:
+                embed = discord.Embed(description=f"User was not registered")
+                await ctx.send(embed=embed)
+
         else:
-            embed = discord.Embed(description=f"User was not registered")
+            embed = discord.Embed(description=f"you don't have enough permission to use this command")
             await ctx.send(embed=embed)
 
     @commands.command(name='profile')
