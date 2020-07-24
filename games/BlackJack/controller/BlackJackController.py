@@ -3,8 +3,8 @@ import asyncio
 import discord
 
 from Util import MoneyParser
-import cogs.BlackJackCommands as BlackJackCommands
 from context.UserContext import UserContext
+from games.BlackJack.util import Constants
 from ..model import Player
 from ..model import Deck
 
@@ -226,4 +226,4 @@ class BlackJackGame:
             await self.ctx.send(embed=embed)
 
         # TODO: better code this global game finalized logic
-        BlackJackCommands.current_game = None
+        Constants.current_game = None

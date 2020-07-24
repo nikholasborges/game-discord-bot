@@ -3,7 +3,7 @@ from discord.ext import commands, tasks
 from Util import Validator
 from context.UserContext import UserContext
 from games.BlackJack.controller.BlackJackController import BlackJackGame
-
+from games.BlackJack.util import Constants
 
 current_game = None
 
@@ -27,7 +27,6 @@ class BlackJackCommands(commands.Cog):
     # commands listener
     @commands.command(name='blackjack')
     async def play_blackjack(self, ctx, *args):
-        global current_game
 
         # TODO: better code this decision logic
 
@@ -41,7 +40,7 @@ class BlackJackCommands(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        if current_game is not None:
+        if Constants.current_game is not None:
             embed = discord.Embed(
                 description=f"there's a game running played by {self.current_user_playing}")
             await ctx.send(embed=embed)
@@ -78,19 +77,18 @@ class BlackJackCommands(commands.Cog):
                     return
 
                 user_context.retrieve_money(money)
-                current_game = BlackJackGame(ctx, money, user_id)
+                Constants.current_game = BlackJackGame(ctx, money, user_id, guild_id)
                 self.current_user_playing = ctx.author
-                await current_game.start_round()
+                await Constants.current_game.start_round()
 
     # commands listener
     @commands.command(name='hit')
     async def hit(self, ctx):
-        global current_game
 
-        if current_game is not None:
+        if Constants.current_game is not None:
 
             if ctx.author == self.current_user_playing:
-                await current_game.player_hit()
+                await Constants.current_game.player_hit()
             else:
                 embed = discord.Embed(description=f"There's a game currently running for {self.current_user_playing}")
                 await ctx.send(embed=embed)
@@ -102,10 +100,9 @@ class BlackJackCommands(commands.Cog):
     # commands listener
     @commands.command(name='stay')
     async def stay(self, ctx):
-        global current_game
 
-        if current_game is not None:
-            await current_game.player_stay()
+        if Constants.current_game is not None:
+            await Constants.current_game.player_stay()
         else:
             embed = discord.Embed(description="There isn't a game running right now.")
             await ctx.send(embed=embed)
@@ -113,10 +110,9 @@ class BlackJackCommands(commands.Cog):
     # commands listener
     @commands.command(name='end_game')
     async def end_game(self, ctx):
-        global current_game
 
-        if current_game is not None:
-            await current_game.end_game()
+        if Constants.current_game is not None:
+            await Constants.current_game.end_game()
             embed = discord.Embed(description="Game Finalized.")
             await ctx.send(embed=embed)
         else:
