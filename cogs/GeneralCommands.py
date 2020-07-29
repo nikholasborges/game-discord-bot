@@ -1,8 +1,11 @@
+import re
+
 import discord
 import os
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
+from Util import Math
 from context.MongoPosts import UserPost
 from context.UserContext import UserContext
 
@@ -16,8 +19,18 @@ class GeneralCommands(commands.Cog):
     # events listener
     @commands.Cog.listener()
     async def on_ready(self):
+
         print('Bot is online')
         await self.bot.change_presence(activity=discord.Game('!help'))
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+
+        pattern = re.compile('[0-9]d|D[0-9]')
+
+        if pattern.search(message.content):
+            result = await Math.dice_calculator(message.content)
+            await message.channel.send(f'{message.author.mention}  →  {result}  ( {str(message.content)} )')
 
     # commands listener
     @commands.command(name='ping')

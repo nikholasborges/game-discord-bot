@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fd5509d-9951-4d8c-a4d5-3d1dd3261ef5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Util/Math.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cogs/GeneralCommands.py" beforeDir="false" afterPath="$PROJECT_DIR$/cogs/GeneralCommands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -298,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595550754998</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="- added administrator-only usability to !unregister and !clear commands">
+      <created>1595551987021</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1595551987021</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -330,6 +340,7 @@
     <MESSAGE value="- dotenv package requirement" />
     <MESSAGE value="- dnspython package requirement" />
     <MESSAGE value="- cog load bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="- cog load bug fix" />
+    <MESSAGE value="- added administrator-only usability to !unregister and !clear commands" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added administrator-only usability to !unregister and !clear commands" />
   </component>
 </project>
